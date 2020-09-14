@@ -1,6 +1,7 @@
 package com.example.Bookstore.web;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,12 @@ public class BookController {
 	@RequestMapping(value = "/books",method = RequestMethod.GET )
 	public @ResponseBody List<Book> bookListRest(){
 		return (List<Book>) bookRepository.findAll();
+	}
+	
+	// Restful service to get book by id
+	@RequestMapping(value ="/book/{id}", method = RequestMethod.GET)
+	public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId){
+		return bookRepository.findById(bookId);
 	}
 	
 	
