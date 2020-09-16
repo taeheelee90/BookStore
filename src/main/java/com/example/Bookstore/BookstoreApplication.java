@@ -33,13 +33,16 @@ public class BookstoreApplication {
 	public CommandLineRunner demo(BookRepository repository, CategoryRepository cRepository) {
 		return (args) -> {
 			log.info("save categories");
-			cRepository.save(new Category("Business"));
-			cRepository.save(new Category("Novel"));
-			cRepository.save(new Category("Technology"));
+			Category c1 = new Category("Business");
+			Category c2 = new Category("Novel");
+			Category c3 = new  Category("Technology");
+			cRepository.save(c1);
+			cRepository.save(c2);
+			cRepository.save(c3);
 			
 			log.info("save few books");
-			repository.save(new Book("Thinking, Fast and Slow", "Daniel Kahneman", 2012, "0141033576", 11.39, cRepository.findByName("Business").get(0)));
-			repository.save(new Book("Good To Great", "Jim Collins", 2001, "0712676090", 18.60, cRepository.findByName("Business").get(0)));
+			repository.save(new Book("Thinking, Fast and Slow", "Daniel Kahneman", 2012, "0141033576", 11.39, c1));
+			repository.save(new Book("Good To Great", "Jim Collins", 2001, "0712676090", 18.60, c1));
 			
 			log.info("fetch books");
 			for (Book book : repository.findAll()) {

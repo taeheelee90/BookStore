@@ -20,6 +20,7 @@ public class Category {
 
 	@JsonBackReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+	//@JsonIgnore // Remove to execute SpringREST 'PATCH' method
 	private List<Book> books;
 
 	public Category() {
