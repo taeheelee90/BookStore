@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,13 +23,18 @@ public class BookController {
 	
 	@Autowired
 	CategoryRepository categoryRepository;
-
+	
 	// home page
-	@RequestMapping("/")
-	public String home() {
-		return "home";
+		@RequestMapping("/")
+		public String home() {
+			return "home";
+		}
+	
+	// log in 
+	@RequestMapping(value="/login")
+	public String login() {
+		return "login";
 	}
-
 	// list page
 	@RequestMapping(value = "/list")
 	public String bookList(Model model) {
@@ -38,7 +44,7 @@ public class BookController {
 	}
 	
 	// Restful service to get all books
-	@RequestMapping(value = "/books",method = RequestMethod.GET )
+	@RequestMapping(value = "/books" )
 	public @ResponseBody List<Book> bookListRest(){
 		return (List<Book>) bookRepository.findAll();
 	}
@@ -63,7 +69,6 @@ public class BookController {
 	@RequestMapping(value = "/submit", method = RequestMethod.POST)
 	public String saveBook(Book book, Model model) {
 		model.addAttribute("book", bookRepository.save(book));
-		// return "saveBook";
 		return "redirect:list";
 	}
 
@@ -76,6 +81,7 @@ public class BookController {
 	}
 
 	// delete book
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteBook(@PathVariable("id") Long bookId, Model model) {
 		bookRepository.deleteById(bookId);
