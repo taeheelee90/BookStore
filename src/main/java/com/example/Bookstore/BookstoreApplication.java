@@ -9,8 +9,12 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.Bookstore.domain.Book;
 import com.example.Bookstore.domain.Category;
+import com.example.Bookstore.domain.User;
 import com.example.Bookstore.repository.BookRepository;
 import com.example.Bookstore.repository.CategoryRepository;
+import com.example.Bookstore.repository.UserRepository;
+
+
 
 
 @SpringBootApplication
@@ -30,7 +34,7 @@ public class BookstoreApplication {
 	 */
 	
 	@Bean
-	public CommandLineRunner demo(BookRepository repository, CategoryRepository cRepository) {
+	public CommandLineRunner demo(BookRepository repository, CategoryRepository cRepository, UserRepository urepository) {
 		return (args) -> {
 			log.info("save categories");
 			Category c1 = new Category("Business");
@@ -43,6 +47,13 @@ public class BookstoreApplication {
 			log.info("save few books");
 			repository.save(new Book("Thinking, Fast and Slow", "Daniel Kahneman", 2012, "0141033576", 11.39, c1));
 			repository.save(new Book("Good To Great", "Jim Collins", 2001, "0712676090", 18.60, c1));
+			
+			// Create users: user/user, admin/admin
+			User user1 = new User("user", "$2a$10$zTvn5SMAQ.NSO/jnY3PjAueq2qEKG1gVLXASHCob6q6.EpBDj90H6", "user@email.com", "USER");
+			User user2 = new User("admin", "$2a$10$Qflab20ugY5RFyC65P.2VuqGPGLvlJEuzGOqZsB21j9j8tJlbcrGe", "admin@email.com", "ADMIN");
+			urepository.save(user1);
+			urepository.save(user2);
+			
 			
 			log.info("fetch books");
 			for (Book book : repository.findAll()) {
