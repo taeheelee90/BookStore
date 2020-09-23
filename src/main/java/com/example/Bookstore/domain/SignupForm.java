@@ -17,7 +17,7 @@ public class SignupForm {
 	private String passwordCheck = "";
 
 	@NotEmpty
-	@Size(min = 10, max = 50)
+	@Size(min = 7, max = 50)
 	private String email = "";
 
 	@NotEmpty

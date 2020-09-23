@@ -16,7 +16,7 @@ import com.example.Bookstore.domain.User;
 import com.example.Bookstore.repository.UserRepository;
 
 @Controller
-public class UserContoller {
+public class UserController {
 
 	@Autowired
 	private UserRepository repository;
