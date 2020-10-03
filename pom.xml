@@ -15,9 +15,11 @@
 	<name>Bookstore</name>
 	<description>Demo project for Spring Boot</description>
 
+	<!-- Heroku Deploy 
 	<properties>
-		<java.version>8</java.version>
-	</properties>
+		<java.version>11</java.version>
+	</properties>	
+	 -->
 
 	<dependencies>
 		<dependency>
