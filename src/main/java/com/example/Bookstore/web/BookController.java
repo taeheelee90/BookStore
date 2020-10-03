@@ -20,21 +20,22 @@ import com.example.Bookstore.repository.CategoryRepository;
 public class BookController {
 	@Autowired
 	BookRepository bookRepository;
-	
+
 	@Autowired
 	CategoryRepository categoryRepository;
-	
+
 	// home page
-		@RequestMapping("/")
-		public String home() {
-			return "home";
-		}
-	
-	// log in 
-	@RequestMapping(value="/login")
+	@RequestMapping("/")
+	public String home() {
+		return "home";
+	}
+
+	// log in
+	@RequestMapping(value = "/login")
 	public String login() {
 		return "login";
 	}
+
 	// list page
 	@RequestMapping(value = "/list")
 	public String bookList(Model model) {
@@ -42,21 +43,19 @@ public class BookController {
 		return "booklist";
 
 	}
-	
+
 	// Restful service to get all books
-	@RequestMapping(value = "/books" )
-	public @ResponseBody List<Book> bookListRest(){
+	@RequestMapping(value = "/books")
+	public @ResponseBody List<Book> bookListRest() {
 		return (List<Book>) bookRepository.findAll();
 	}
-	
+
 	// Restful service to get book by id
-	@RequestMapping(value ="/book/{id}", method = RequestMethod.GET)
-	public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId){
+	@RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
+	public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId) {
 		return bookRepository.findById(bookId);
 	}
-	
-	
-	
+
 	// add new book
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addBook(Model model) {
