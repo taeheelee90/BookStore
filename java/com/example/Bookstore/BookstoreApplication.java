@@ -22,14 +22,6 @@ public class BookstoreApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
-	/* First running: delete spring.jpa.hibernate.ddl-auto=none in application.properties) 
-	 * 				  use CommandLineRunner method
-	 * => Create new tables with test data 
-	 * 
-	 * After first running: insert spring.jpa.hibernate.ddl-auto=none to application properties. 
-	 * 						block CommandLineRunner method
-	 * => Using existing tables with stored data
-	 */
 	
 	@Bean
 	public CommandLineRunner demo(BookRepository repository, CategoryRepository cRepository, UserRepository urepository) {
